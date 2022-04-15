@@ -75,19 +75,20 @@ public class PdfDao {
 		String sql = "insert into pdf(pdf_name, pdf_original_name, pdf_type, pdf_pw, writer, create_date, update_date) values (?,?,?,?,?,now(), now())";
 		conn = DriverManager.getConnection(dburl, dbuser, dbpw);
 		stmt = conn.prepareStatement(sql);
-		stmt.setString(1, pdf.pdfName); //몇번째 물음표 무엇인지의 설명
-		stmt.setString(2, pdf.pdfOriginalName);
-		stmt.setString(3, pdf.pdfType);
-		stmt.setString(4, pdf.pdfPw);
-		stmt.setString(5, pdf.writer);
+		stmt.setString(1, pdf.getPdfName()); //몇번째 물음표 무엇인지의 설명
+		stmt.setString(2, pdf.getPdfOriginalName());
+		stmt.setString(3, pdf.getPdfType());
+		stmt.setString(4, pdf.getPdfPw());
+		stmt.setString(5, pdf.getWriter());
 		//쿼리실행
 		rs = stmt.executeQuery();
-		if(rs.next()) {
-			pdf.pdfName = rs.getString("pdf_name");
-			pdf.pdfOriginalName = rs.getString("pdf_original_name");
-			pdf.pdfType = rs.getString("pdf_type");
-			pdf.pdfPw = rs.getString("pdf_pw");
-			pdf.writer = rs.getString("writer");
+		while(rs.next()) {
+			Pdf p = new Pdf();
+			p.setPdfName(rs.getString("pdf_name"));
+			p.setPdfOriginalName(rs.getString("pdf_original_name"));
+			p.setPdfType(rs.getString("pdf_type"));
+			p.setPdfPw(rs.getString("pdf_pw"));
+			p.setWriter(rs.getString("writer"));
 
 		}
 		//반납
@@ -118,14 +119,14 @@ public class PdfDao {
 		//쿼리실행
 		while(rs.next()) {
 			Pdf p = new Pdf();
-			p.pdfNo = rs.getInt("pdfNo");
-			p.pdfName = rs.getString("pdfName");
-			p.pdfOriginalName = rs.getString("pdfOriginalName");
-			p.pdfType = rs.getString("pdfType");
-			p.pdfPw = rs.getString("pdfPw");
-			p.writer = rs.getString("writer");
-			p.createDate = rs.getString("createDate");
-			p.updateDate = rs.getString("updateDate");
+			p.setPdfNo(rs.getInt("pdfNo"));
+			p.setPdfName(rs.getString("pdfName"));
+			p.setPdfOriginalName(rs.getString("pdfOriginalName"));
+			p.setPdfType(rs.getString("pdfType"));
+			p.setPdfPw(rs.getString("pdfPw"));
+			p.setWriter(rs.getString("writer"));
+			p.setCreateDate(rs.getString("createDate"));
+			p.setUpdateDate(rs.getString("updateDate"));
 			list.add(p);//목록에 추가함
 		}
 		//반납
@@ -177,13 +178,13 @@ public class PdfDao {
 		System.out.println(stmt+ "<-상세보기");
 		//쿼리실행
 		rs = stmt.executeQuery();
-		if(rs.next()) {
-			pdf = new Pdf();
-			pdf.pdfNo = rs.getInt("pdfNo");
-			pdf.pdfName = rs.getString("pdfName");
-			pdf.writer = rs.getString("writer");
-			pdf.createDate = rs.getString("createDate");
-			pdf.updateDate = rs.getString("updateDate");
+		while(rs.next()) {
+			Pdf p = new Pdf();
+			p.setPdfNo(rs.getInt("pdfNo"));
+			p.setPdfName(rs.getString("pdfName"));
+			p.setWriter(rs.getString("writer"));
+			p.setCreateDate(rs.getString("createDate"));
+			p.setUpdateDate(rs.getString("updateDate"));
 		}
 		//반납
 		rs.close();

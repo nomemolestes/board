@@ -27,9 +27,9 @@ public class GuestbookDao {
 		String sql = "INSERT INTO guestbook(guestbook_content, writer, guestbook_pw, create_date, update_date) VALUES (?,?,?,NOW(),NOW())";
 		conn = DriverManager.getConnection(dburl, dbuser, dbpw); 
 		stmt = conn.prepareStatement(sql);
-		stmt.setString(1, this.??);//몇번째이고 무엇을 의미하는지
-		stmt.setString(2, guestbook.writer);
-		stmt.setString(3, guestbook.guestbookPw);
+		stmt.setString(1, guestbook.getGuestbookContent());//몇번째이고 무엇을 의미하는지
+		stmt.setString(2, guestbook.getWriter());
+		stmt.setString(3, guestbook.getGuestbookPw());
 		//쿼리실행
 		int row = stmt.executeUpdate();
 		if(row == 1) { //행변화가 있다면

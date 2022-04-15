@@ -54,19 +54,20 @@ public class PhotoDao {
 		String sql = "INSERT INTO photo(photo_name, photo_original_name, photo_type, photo_pw, writer, create_date, update_date) VALUES(?,?,?,?,?,NOW(),NOW())";
 		conn = DriverManager.getConnection(dburl, dbuser, dbpw); 
 		stmt = conn.prepareStatement(sql);
-		stmt.setString(1, photo.photoName);//몇번째 물음표에 어떤게 들어가는지.
-		stmt.setString(2, photo.photoOriginalName);
-		stmt.setString(3, photo.photoType);
-		stmt.setString(4, photo.photoPw);
-		stmt.setString(5, photo.writer);
+		stmt.setString(1, photo.getPhotoName());//몇번째 물음표에 어떤게 들어가는지.
+		stmt.setString(2, photo.getPhotoOriginalName());
+		stmt.setString(3, photo.getPhotoType());
+		stmt.setString(4, photo.getPhotoPw());
+		stmt.setString(5, photo.getWriter());
 		//쿼리실행
 		rs = stmt.executeQuery();//insert-update
-		if(rs.next()) {
-			photo.photoName = rs.getString("photo_name");
-			photo.photoOriginalName = rs.getString("photo_original_name");
-			photo.photoType = rs.getString("photo_type");
-			photo.photoPw = rs.getString("photo_pw");
-			photo.writer = rs.getString("writer");
+		while(rs.next()) {
+			Photo p = new Photo();
+			p.setPhotoName(rs.getString("photo_name"));
+			p.setPhotoName(rs.getString("photo_original_name"));
+			p.setPhotoType(rs.getString("photo_type"));
+			p.setPhotoPw(rs.getString("photo_pw"));
+			p.setWriter(rs.getString("writer"));
 		}
 		rs.close();
 		stmt.close();//연결종료.반환
@@ -120,14 +121,14 @@ public class PhotoDao {
 		//쿼리실행,데이터변환(가공)
 		while(rs.next()) {
 			Photo p = new Photo();//새로운 객체생성
-			p.photoNo = rs.getInt("photoNo");
-			p.photoName = rs.getString("photoName");
-			p.photoOriginalName = rs.getString("photoOriginalName");
-			p.photoType = rs.getString("photoType");
-			p.photoPw = rs.getString("photoPw");
-			p.writer = rs.getString("writer");
-			p.createDate = rs.getString("createDate");
-			p.updateDate = rs.getString("updateDate");
+			p.setPhotoNo(rs.getInt("photoNo"));
+			p.setPhotoName(rs.getString("photoName"));
+			p.setPhotoOriginalName(rs.getString("photoOriginalName"));
+			p.setPhotoType(rs.getString("photoType"));
+			p.setPhotoPw(rs.getString("photoPw"));
+			p.setWriter(rs.getString("writer"));
+			p.setCreateDate(rs.getString("createDate"));
+			p.setUpdateDate(rs.getString("updateDate"));
 			list.add(p);//목록에 추가함
 		}
 		//반납
@@ -180,13 +181,13 @@ public class PhotoDao {
 		System.out.println(stmt+"<-상세보기");
 		//쿼리실행
 		rs = stmt.executeQuery();
-		if(rs.next()) { //다음 행에 값이 있다면
-			photo = new Photo();//새로운 객체생성,기본생성자메서드
-			photo.photoNo = rs.getInt("photoNo");//이 값을 채움
-			photo.photoName = rs.getString("photoName");
-			photo.writer = rs.getString("writer");
-			photo.createDate = rs.getString("createDate");
-			photo.updateDate = rs.getString("updateDate");
+		while(rs.next()) { //다음 행에 값이 있다면
+			Photo p = new Photo();//새로운 객체생성,기본생성자메서드
+			p.setPhotoNo(rs.getInt("photoNo"));//이 값을 채움
+			p.setPhotoName(rs.getString("photoName"));
+			p.setWriter(rs.getString("writer"));
+			p.setCreateDate(rs.getString("createDate"));
+			p.setUpdateDate(rs.getString("updateDate"));
 		}
 		//반납
 		rs.close();
