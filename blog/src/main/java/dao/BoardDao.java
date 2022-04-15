@@ -23,11 +23,11 @@ public class BoardDao {
 		String sql = "insert into board(board_no, category_name, board_title, board_content, board_pw, create_date, update_date) values (?,?,?,?,?,now(), now()) "; 
 		conn = DriverManager.getConnection(dburl, dbuser, dbpw); 
 		stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, insertBoard.setBoardNo());//몇번째 물음표 무엇인지설명
-		stmt.setString(2, Board.categoryName);//몇번째 물음표 무엇인지설명
-		stmt.setString(3, board.boardTitle);
-		stmt.setString(4, board.boardContent);
-		stmt.setString(5, board.boardPw);
+		stmt.setInt(1, board.getBoardNo());
+		stmt.setString(2, board.getCategoryName());
+		stmt.setString(3, board.getBoardTitle());
+		stmt.setString(4, board.getBoardPw());
+		stmt.setString(5, board.getBoardPw());
 		int row= stmt.executeUpdate();//insert-update
 		if(row == 1) {
 			System.out.println("입력성공");//행의 1줄 변화가 생긴다면 입력성공한것
@@ -90,13 +90,13 @@ public class BoardDao {
 		// 데이터 변환(가공)
 		while(rs.next()) { //다음행의 커서뒤에 데이터가 있으면 갖고온다.
 			Board b = new Board();
-			b.boardNo = rs.getInt("boardNo");
-			b.categoryName = rs.getString("categoryName");
-			b.boardTitle = rs.getString("boardTitle");
-			b.boardContent = rs.getString("boardContent");
-			b.boardPw = rs.getString("boardPw");
-			b.createDate = rs.getString("createDate");
-			b.updateDate = rs.getString("updateDate");
+			b.setBoardNo(rs.getInt("boardNo"));
+			b.setCategoryName(rs.getString("categoryName"));
+			b.setBoardTitle(rs.getString("boardTitle"));
+			b.setBoardContent(rs.getString("boardContent"));
+			b.setBoardPw(rs.getString("boardPw"));
+			b.setCreateDate(rs.getString("createDate"));
+			b.setUpdateDate(rs.getString("updateDate"));
 			list.add(b);//리스트 추가.
 		}
 			
