@@ -41,14 +41,14 @@
 	System.out.println(rs+ " <-rs");//디버깅
 	
 	Board board= null;
-	if(rs.next()) { //커서의 다음행이 있으면 true리턴하고 그 행으로 이동,저장된값을 한행단위로 불러옴
-		board= new Board();//데이터가 있을때만 보드를 만든다
-		board.boardNo = rs.getInt("boardNo");
-		board.categoryName= rs.getString("categoryName");
-		board.boardTitle = rs.getString("boardTitle");
-		board.boardContent = rs.getString("boardContent");
-		board.createDate = rs.getString("createDate");
-		board.updateDate = rs.getString("updateDate");
+	while(rs.next()) { //커서의 다음행이 있으면 true리턴하고 그 행으로 이동,저장된값을 한행단위로 불러옴
+		Board b = new Board();//데이터가 있을때만 보드를 만든다
+		b.setBoardNo(rs.getInt("boardNo"));
+		b.setCategoryName(rs.getString("categoryName"));
+		b.setBoardTitle(rs.getString("boardTitle"));
+		b.setBoardContent(rs.getString("boardContent"));
+		b.setCreateDate(rs.getString("createDate"));
+		b.setUpdateDate(rs.getString("updateDate"));
 	}
 		conn.close(); //conn의 해제, 사용이 끝나면 반납, 연결종료
 %>
@@ -84,35 +84,35 @@
 	<table class="table table-hover">
 		<tr> <!-- 해당하는 값들을 가져와서 테이블을 만든다. -->
 			<td>board_no</td>
-			<td><%=board.boardNo%></td>
+			<td><%=board.getBoardNo()%></td>
 		</tr>
 		<tr class="table-dark text-dark">
 			<td>category_name</td>
-			<td><%=board.categoryName%></td>
+			<td><%=board.getCategoryName()%></td>
 		</tr>
 		<tr class="table-dark text-dark">
 			<td>board_title</td>
-			<td><%=board.boardTitle%></td>
+			<td><%=board.getBoardTitle()%></td>
 		</tr>
 		<tr class="table-dark text-dark">
 			<td>board_content</td>
-			<td><%=board.boardContent%></td>
+			<td><%=board.getBoardContent()%></td>
 		</tr>
 		<tr>
 			<td>create_date</td>
-			<td><%=board.createDate%></td>
+			<td><%=board.getCreateDate()%></td>
 		</tr>
 		<tr>
 			<td>update_date</td>
-			<td><%=board.updateDate%></td>
+			<td><%=board.getUpdateDate()%></td>
 		</tr>
 	</table>
 	<div>
 	<button type="button" class="btn btn-outline-secondary btn-sm">
-		<a href="<%=request.getContextPath()%>/updateBoardForm.jsp?boardNo=<%=board.boardNo%>">수정</a>
+		<a href="<%=request.getContextPath()%>/updateBoardForm.jsp?boardNo=<%=board.getBoardNo()%>">수정</a>
 	</button>
 	<button type="button" class="btn btn-outline-secondary btn-sm">
-		<a href="<%=request.getContextPath()%>/deleteBoardForm.jsp?boardNo=<%=board.boardNo%>">삭제</a>
+		<a href="<%=request.getContextPath()%>/deleteBoardForm.jsp?boardNo=<%=board.getBoardNo()%>">삭제</a>
 	</button>
 	</div>
 	</div>

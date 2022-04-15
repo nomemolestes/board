@@ -87,9 +87,9 @@ currentPage    | 	시작: beginRow
 				for(Board b : list) {
 			%>
 					<tr> <!-- contextpath가 변경되도 전체를 다 바꾸지 않아도됨,웹전체경로(프로젝트+파일경로)를 가져옴. -->
-						<td><%=b.categoryName%></td>
+						<td><%=b.getCategoryName()%></td>
 						<td><a href="<%=request.getContextPath()%>/boardOne.jsp?boardNo=<%=b.boardNo%>"><%=b.boardTitle%></a></td>
-						<td><%=b.createDate%></td>
+						<td><%=b.getCreateDate()%></td>
 					</tr>
 			<%		
 				}

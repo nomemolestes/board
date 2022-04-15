@@ -7,7 +7,6 @@
 	int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 	//한번에 묶어서 처리함??
 	Board board = new Board();
-	board.boardNo = boardNo;	
 	//maria db 드라이버 로딩
 	Class.forName("org.mariadb.jdbc.Driver");
 	Connection conn = null;

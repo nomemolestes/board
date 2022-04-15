@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	int boardNo = Integer.parseInt(request.getParameter("boardNo"));//요청받은 boardNo값을 정수타입으로 변환해서 저장
+	int boardNo = 0;
+	System.out.println(boardNo + "<-boardNo");
 	String boardPw = request.getParameter("boardPw");//요청받은 boardPW값을 정수타입으로 변환해서 저장
 	
 %>
