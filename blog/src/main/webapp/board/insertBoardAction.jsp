@@ -15,9 +15,9 @@
 	
 	//요청에서 넘겨진 값들을 하나의 변수로
 	Board board = new Board();
-	board.categoryName = categoryName;
-	board.boardTitle = boardTitle;
-	board.boardContent = boardContent;
+	board.setCategoryName(categoryName);
+	board.setBoardTitle(boardTitle);
+	board.setBoardContent(boardContent);
 	//BoardDao 호출함
 	BoardDao boardDao = new BoardDao();
 	boardDao.insertBoard(board);	
