@@ -10,8 +10,9 @@ import vo.Board;
 
 public class BoardDao {
 	public BoardDao() {}//생성자메서드
+	
 	//입력
-	public void insertBoard(Board board) throws Exception {
+	public void insertBoardList(Board board) throws Exception {
 		//드라이버 로딩
 		Class.forName("org.mariadb.jdbc.Driver");
 		Connection conn = null;
@@ -38,12 +39,10 @@ public class BoardDao {
 		stmt.close();
 		conn.close();//연결종료
 	}
-
-	
-	//수정
-	public void updateBoard(Board board) {}
 	//삭제
-	public void deleteBoard(int BoardNo, String categoryName) {}
+	public void deleteBoard(int BoardNo, String categoryName) {
+		
+	}
 	//board 전체 행의 수를 반환하는 메서드
 	public int selectBoardTotalRow() throws Exception {
 		int row = 0;
@@ -175,34 +174,43 @@ public class BoardDao {
 
 	}
 	//boardList, boardNo categoryName boardTitle createDate목록
-	public ArrayList<String> selectBoardList(String CategoryName) throws Exception {
-		ArrayList<String> list = new ArrayList<>();
-		//드라이버 로딩
+	public ArrayList<Board> boardList(int beginRow, int rowPerPage, String categoryName) throws Exception{
+		ArrayList<Board> list = new ArrayList<Board>();
 		Class.forName("org.mariadb.jdbc.Driver");
-		//maria db접속
+		//데이터베이스 자원 준비
+		String sql = null;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-
-		String dburl = "jdbc:mariadb://localhost:3306/blog"; //db주소
-		String dbuser = "root"; //db계정
-		String dbpw = "java1234"; //비밀번호
-		conn = DriverManager.getConnection(dburl, dbuser, dbpw);
-		System.out.println(conn + " : conn결과");//디버깅
-
-		String sql = "SELECT board_no boardNo, category_name categoryName, board_title boardTitle, create_date createDate FROM board ORDER BY create_date DESC LIMIT 0, 10";
+		String dburl = "jdbc:mariadb://localhost:3306/blog"; 
+		String dbuser = "root"; 
+		String dbpw = "java1234"; 
+		conn = DriverManager.getConnection(dburl, dbuser, dbpw); 
+		if(categoryName == "") { 
+			sql = "SELECT board_no boardNo, category_name categoryName, board_title boardTitle, create_date createDate FROM board ORDER BY create_date DESC LIMIT ?, ?";
 			stmt = conn.prepareStatement(sql);
-		rs = stmt.executeQuery();
-		ArrayList<Board> boardList = new ArrayList<Board>();
-		while(rs.next()) {
-			Board b = new Board();
-			b.setBoardNo(rs.getInt("boardNo"));
-			b.setCategoryName(rs.getString("categoryName"));
-			b.setBoardTitle(rs.getString("boardTitle"));
-			b.setCreateDate(rs.getString("createDate"));
-			boardList.add(b);
+			stmt.setInt(1, beginRow); 
+			stmt.setInt(2, rowPerPage); //행개수
+		} else {
+			sql = "SELECT board_no boardNo, category_name categoryName, board_title boardTitle, create_date createDate FROM board WHERE category_name =? ORDER BY create_date DESC LIMIT ?, ?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, categoryName);
+			stmt.setInt(2, beginRow); 
+			stmt.setInt(3, rowPerPage);
 		}
-		
-		return list;
+				rs = stmt.executeQuery();
+				while(rs.next()) { 
+					Board b = new Board(); 
+					b.setBoardNo(rs.getInt("BoardNo"));
+					b.setCategoryName(rs.getString("categoryName"));
+					b.setBoardTitle(rs.getString("boardTitle"));
+					b.setCreateDate(rs.getString("createDate"));
+					list.add(b); 
+				}
+				rs.close();
+				stmt.close();
+				conn.close();
+				
+				return list;
 	}
 }

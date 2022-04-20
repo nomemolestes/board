@@ -4,34 +4,9 @@
 <%@ page import = "java.util.*" %>
 <%@ page import = "vo.*" %>
 <%
-	String categoryName = request.getParameter("categoryName");	
-
-	// boardList
-	String boardSql = null;
-	PreparedStatement boardStmt = null;
-	if(categoryName == null) {
-		boardSql = "SELECT board_no boardNo, category_name categoryName, board_title boardTitle, create_date createDate FROM board ORDER BY create_date DESC LIMIT 0, 10";
-		boardStmt = conn.prepareStatement(boardSql);
-	} else {
-		boardSql = "SELECT board_no boardNo, category_name categoryName, board_title boardTitle, create_date createDate FROM board WHERE category_name =? ORDER BY create_date DESC LIMIT 0, 10";
-		boardStmt = conn.prepareStatement(boardSql);
-		boardStmt.setString(1, categoryName);
-	}
-	ResultSet boardRs = boardStmt.executeQuery();
-	ArrayList<Board> boardList = new ArrayList<Board>();
-	while(boardRs.next()) {
-		Board b = new Board();
-		b.setBoardNo(boardRs.getInt("boardNo"));
-		b.setCategoryName(boardRs.getString("categoryName"));
-		b.setBoardTitle(boardRs.getString("boardTitle"));
-		b.setCreateDate(boardRs.getString("createDate"));
-		boardList.add(b);
-	}
-	
 	//카테고리 목록
 	BoardDao boardDao = new BoardDao();
-	ArrayList<String> list = boardDao.selectCatecoryList(categoryName);
-
+	ArrayList<String> list = boardDao.selectCatecoryList("categoryName");
 %>
 <!DOCTYPE html>
 <html>
@@ -41,10 +16,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
-
 	<!-- category별 게시글 링크 메뉴 -->
-	
-		<form method="post" action="<%=request.getContextPath() %>/board/insertBoardAction.jsp">
+	<form method="post" action="<%=request.getContextPath() %>/board/insertBoardAction.jsp">
   			<table class="table table-striped">
   				<tr>
 					<td>categoryName</td>

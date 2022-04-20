@@ -3,8 +3,10 @@
 <%@ page import= "dao.*" %>
 <%@ page import = "java.util.*" %>
 <%	
+	
 	//boardList 페이지를 실행하면 최근 10개목록 보여주고 1p로 설정.
 	int currentPage = 1;//현재페이지의 기본값이 1페이지임.
+	
 	if(request.getParameter("currentPage") != null) {//이전, 다음링크를 통해서 들어온거라면
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
@@ -32,7 +34,7 @@ currentPage    | 	시작: beginRow
 	int rowPerPage = 10;//한 페이지에 보고싶은 페이지는 10개의 페이지입니다.	
 	int beginRow = (currentPage-1)*rowPerPage;//g현재페이지가 변경되면 beginRow도 변경->갖고오는데이터가 변경됨.
 	BoardDao boardDao= new BoardDao();
-	ArrayList<Board> list = boardDao.selectBoardListByPage(beginRow, rowPerPage);
+	ArrayList<Board> list = boardDao.selectBoardListByPage(beginRow, rowPerPage, categoryName);
 	
 	int lastPage = 0;//마지막 페이지 초기화
 	int totalCount = boardDao.selectBoardTotalRow();
@@ -88,7 +90,7 @@ currentPage    | 	시작: beginRow
 			%>
 					<tr> <!-- contextpath가 변경되도 전체를 다 바꾸지 않아도됨,웹전체경로(프로젝트+파일경로)를 가져옴. -->
 						<td><%=b.getCategoryName()%></td>
-						<td><a href="<%=request.getContextPath()%>/boardOne.jsp?boardNo=<%=b.boardNo%>"><%=b.boardTitle%></a></td>
+						<td><a href="<%=request.getContextPath()%>/board/boardOne.jsp?boardNo=<%=b.getBoardNo()%>"><%=b.getBoardTitle()%></a></td>
 						<td><%=b.getCreateDate()%></td>
 					</tr>
 			<%		
@@ -100,9 +102,7 @@ currentPage    | 	시작: beginRow
 		<%
 			if(currentPage > 1) { //현재페이지가 1이면 이전페이지가 존재하면 안됨.
 		%>
-		<button type="button" class="btn btn-outline-secondary">
-			<a href="<%=request.getContextPath()%>/boardList.jsp?currentPage=<%=currentPage-1%>&categoryName=<%=categoryName%>&boardTitle=<%=b.boardTitle%>&createDate=<%=createDate%>">이전</a> <!-- 현재페이지값을넘겨줌/현재페이지에서 1을빼줌-->
-		</button>
+				<a href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage-1%>&categoryName=<%=categoryName%>" class="btn btn-outline-secondary btn-sm">이전</a> 		
 		<%		
 			}
 		%>
@@ -119,17 +119,13 @@ currentPage    | 	시작: beginRow
 				//
 				if(currentPage < lastPage) {
 			%>	
-			<button type="button" class="btn btn-outline-secondary btn-sm">
-			<a href="<%=request.getContextPath()%>/boardList.jsp?currentPage=<%=currentPage+1%>&categoryName=<%=categoryName%>&boardTitle=<%=b.boardTitle%>&createDate=<%=createDate%>">다음</a>	 <!-- 현재페이지값을넘겨줌/현재페이지에서 1을빼줌-->
-			</button>
+				<a href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage+1%>&categoryName=<%=categoryName%>" class="btn btn-outline-secondary btn-sm">이전</a> 		
 			<%
 				}
 			%>
 	</div>
 		<div>
-			<button type="button" class="btn btn-outline-secondary btn-sm">
-				<a href="<%=request.getContextPath()%>/insertBoardForm.jsp">입력</a>
-		 	</button>
+				<a href="<%=request.getContextPath()%>/board/insertBoardForm.jsp" class="btn btn-outline-secondary btn-sm">입력</a>
 	</div>
 </div>	
 </body>
