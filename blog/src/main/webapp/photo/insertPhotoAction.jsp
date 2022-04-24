@@ -44,11 +44,11 @@
 		System.out.println("db고고");
 		PhotoDao photoDao = new PhotoDao();
 		Photo photo = new Photo();
-		photo.photoName = photoName;
-		photo.photoOriginalName = photoOriginalName;
-		photo.photoType = photoType;
-		photo.photoPw = photoPw;
-		photo.writer = writer;
+		photo.setPhotoName(photoName);
+		photo.setPhotoOriginalName(photoOriginalName);
+		photo.setPhotoType(photoType);
+		photo.setPhotoPw(photoPw);
+		photo.setWriter(writer);
 		//메서드호출
 		photoDao.insertPhoto(photo);
 		response.sendRedirect(request.getContextPath()+"/photo/photoList.jsp");

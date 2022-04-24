@@ -33,33 +33,33 @@
 	<table class="table table-hover">
 		<tr>
 			<td>번호</td>
-			<td><%=photo.photoNo%></td>
+			<td><%=photo.getPhotoNo()%></td>
 		</tr>
 		<tr>
 			<td>
-				<img src="<%=request.getContextPath()%>/koala/<%=photo.photoName%>">
+				<img src="<%=request.getContextPath()%>/koala/<%=photo.getPhotoName()%>">
 			</td>
 		</tr>
 		<tr>
 			<td>이름</td>
-			<td><%=photo.photoName%></td>
+			<td><%=photo.getPhotoName()%></td>
 		</tr>
 		<tr>
 			<td>작성자</td>
-			<td><%=photo.writer%></td>
+			<td><%=photo.getWriter()%></td>
 		</tr>
 		<tr>
 			<td>작성일자</td>
-			<td><%=photo.createDate %></td>
+			<td><%=photo.getCreateDate() %></td>
 		</tr>
 		<tr>
 			<td>수정일자</td>
-			<td><%=photo.updateDate %></td>
+			<td><%=photo.getUpdateDate()%></td>
 		</tr>
 	</table>
 	<div>
 	<button type="button" class="btn btn-outline-secondary btn-sm">
-		<a href="<%=request.getContextPath()%>/photo/deletePhotoForm.jsp?photoNo=<%=photo.photoNo%>">삭제</a>
+		<a href="<%=request.getContextPath()%>/photo/deletePhotoForm.jsp?photoNo=<%=photo.getPhotoNo()%>">삭제</a>
 	</button>
 	</div>
 </body>

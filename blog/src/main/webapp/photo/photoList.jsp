@@ -95,8 +95,8 @@ currentPage = (currentPage-1)*10
 				if(i<list.size()) {
 		%>	
 				<td>
-					<a href="<%=request.getContextPath()%>/photo/photoOne.jsp?photoNo=<%=list.get(i).photoNo%>">
-						<img src="<%=request.getContextPath()%>/koala/<%=list.get(i).photoName%>" width="250" height="250">
+					<a href="<%=request.getContextPath()%>/photo/photoOne.jsp?photoNo=<%=list.get(i).getPhotoNo()%>">
+						<img src="<%=request.getContextPath()%>/koala/<%=list.get(i).getPhotoName()%>" width="250" height="250">
 					</a>		
 				</td>
 		<%
