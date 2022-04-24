@@ -10,8 +10,8 @@
 	System.out.println(guestbookPw+"<-비번");
 	// 값 하나로묶어서 처리, 객체생성
 	Guestbook guestbook = new Guestbook();
-	guestbook.guestbookNo = guestbookNo;
-	guestbook.guestbookPw = guestbookPw;
+	guestbook.setGuestbookNo(guestbookNo);
+	guestbook.setGuestbookPw(guestbookPw);
 	//dao호출
 	GuestbookDao guestbookDao = new GuestbookDao();
 	int row = guestbookDao.deleteGuestbook(guestbookNo, guestbookPw);
@@ -21,7 +21,7 @@
 		response.sendRedirect(request.getContextPath()+"/guestbook/guestbookList.jsp"); //guestbookList로 이동
 	} else if (row == 0) { //삭제 실패 할때
 		System.out.println("삭제 실패");
-		response.sendRedirect(request.getContextPath()+"/guestbook/deleteGuestbookForm.jsp?guestbookNo="+guestbook.guestbookNo); //deleteGuestbookForm으로이동
+		response.sendRedirect(request.getContextPath()+"/guestbook/deleteGuestbookForm.jsp?guestbookNo="+guestbook.getGuestbookNo()); //deleteGuestbookForm으로이동
 	} else { //알수없는 에러
 		System.out.println("에러");
 	}

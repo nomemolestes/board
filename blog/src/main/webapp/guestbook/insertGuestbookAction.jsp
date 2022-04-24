@@ -11,9 +11,9 @@
 	String guestbookContent = request.getParameter("guestbookContent");	
 	//요청에서 넘겨진 값들을 하나의 변수로
 	Guestbook guestbook = new Guestbook();
-	guestbook.writer = writer;
-	guestbook.guestbookPw = guestbookPw;
-	guestbook.guestbookContent = guestbookContent;
+	guestbook.setWriter(writer);
+	guestbook.setGuestbookPw(guestbookPw);
+	guestbook.setGuestbookContent(guestbookContent);
 	//GuestbookDao를 호출함.
 	GuestbookDao guestbookDao = new GuestbookDao();
 	guestbookDao.insertGuestbook(guestbook);

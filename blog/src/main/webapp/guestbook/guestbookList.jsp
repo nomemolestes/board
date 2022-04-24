@@ -59,16 +59,16 @@
 %>
 		<table class="table table-striped">
 			<tr>
-				<td><%=g.writer%></td>
-				<td><%=g.createDate%></td>
+				<td><%=g.getWriter()%></td>
+				<td><%=g.getCreateDate()%></td>
 			</tr>
 			<tr>
-				<td><%=g.guestbookContent%></td>
+				<td><%=g.getGuestbookContent()%></td>
 			</tr>
 		</table>
 			<div>
-			<a href="<%=request.getContextPath()%>/guestbook/updateGuestbookForm.jsp?guestbookNo=<%=g.guestbookNo%>">수정</a>
-			<a href="<%=request.getContextPath()%>/guestbook/deleteGuestbookForm.jsp?guestbookNo=<%=g.guestbookNo%>">삭제</a>
+			<a href="<%=request.getContextPath()%>/guestbook/updateGuestbookForm.jsp?guestbookNo=<%=g.getGuestbookNo()%>">수정</a>
+			<a href="<%=request.getContextPath()%>/guestbook/deleteGuestbookForm.jsp?guestbookNo=<%=g.getGuestbookNo()%>">삭제</a>
 		</div>
 	
 <%	

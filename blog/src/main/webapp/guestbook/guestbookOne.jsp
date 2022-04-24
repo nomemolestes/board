@@ -32,19 +32,19 @@
 	<table class="table table-hover">
 		<tr> <!-- 해당하는 값들을 가져와서 테이블을 만든다. -->
 			<td>guestbook_no</td>
-			<td><%=guestbook.guestbookNo%></td>
+			<td><%=guestbook.getGuestbookNo()%></td>
 		</tr>
 		<tr class="table-dark text-dark">
 			<td>guestbook_content</td>
-			<td><%=guestbook.guestbookContent%></td>
+			<td><%=guestbook.getGuestbookContent()%></td>
 		</tr>
 	</table>
 	<div>
 	<button type="button" class="btn btn-outline-secondary btn-sm">
-		<a href="<%=request.getContextPath()%>/updateGuestbookForm.jsp?guestbookNo=<%=guestbook.guestbookNo%>">수정</a>
+		<a href="<%=request.getContextPath()%>/updateGuestbookForm.jsp?guestbookNo=<%=guestbook.getGuestbookNo()%>">수정</a>
 	</button>
 	<button type="button" class="btn btn-outline-secondary btn-sm">
-		<a href="<%=request.getContextPath()%>/deleteGuestbookForm.jsp?guestbookNo=<%=guestbook.guestbookNo%>">삭제</a>
+		<a href="<%=request.getContextPath()%>/deleteGuestbookForm.jsp?guestbookNo=<%=guestbook.getGuestbookNo()%>">삭제</a>
 	</button>
 	</div>
 	</div>
