@@ -54,7 +54,7 @@
 		%>
 			<tr class="table-warning">
 				<td>
-					<a href="<%=request.getContextPath()%>/pdf/pdfOne.jsp?pdfNo=<%=p.pdfNo%>"><%=p.pdfName%></a>
+					<a href="<%=request.getContextPath()%>/pdf/pdfOne.jsp?pdfNo=<%=p.getPdfNo()%>"><%=p.getPdfName()%></a>
 				</td>
 			</tr>
 		<%		

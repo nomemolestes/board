@@ -10,15 +10,6 @@
 	Pdf pdf = pdfDao.selectPdfOne(pdfNo);
 	//pdf용
 
- 
-
-
-
- 
-
-
-
-
 %>
 <!DOCTYPE html>
 <html>
@@ -42,30 +33,30 @@
 	<table class="table table-hover">
 		<tr class="table-warning">
 			<td>번호</td>
-			<td><%=pdf.pdfNo%></td>
+			<td><%=pdf.getPdfNo()%></td>
 		</tr>
 		<tr class="table-warning">
 			<td>
-				<a href="<%=request.getContextPath()%>/pdfa/<%=pdf.pdfName%>"><%=pdf.pdfName%></a>
+				<a href="<%=request.getContextPath()%>/pdfa/<%=pdf.getPdfName()%>"><%=pdf.getPdfName()%></a>
 				<!-- pdf뷰어페이지 생성 -->
 			</td>
 		</tr>
 		<tr class="table-warning">
 			<td>작성자</td>
-			<td><%=pdf.writer%></td>
+			<td><%=pdf.getWriter()%></td>
 		</tr>
 		<tr class="table-warning">
 			<td>작성일자</td>
-			<td><%=pdf.createDate%></td>
+			<td><%=pdf.getCreateDate()%></td>
 		</tr>
 		<tr class="table-warning">
 			<td>수정일자</td>
-			<td><%=pdf.updateDate%></td>
+			<td><%=pdf.getUpdateDate()%></td>
 		</tr>
 	</table>
 	<div>
 		<button type="button" class="btn btn-outline-secondary btn-sm">
-			<a href="<%=request.getContextPath()%>/pdf/deletePdfForm.jsp?pdfNo=<%=pdf.pdfNo%>">삭제</a>
+			<a href="<%=request.getContextPath()%>/pdf/deletePdfForm.jsp?pdfNo=<%=pdf.getPdfNo()%>">삭제</a>
 		</button>
 	</div>
 </body>
